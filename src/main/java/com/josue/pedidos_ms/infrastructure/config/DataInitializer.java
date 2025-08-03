@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("dev") // Solo se activa en perfil de desarrollo
+@Profile({ "dev", "test" }) // Se activa en perfiles de desarrollo y testing
 public class DataInitializer {
 
   @Autowired
