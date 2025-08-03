@@ -5,14 +5,27 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update # Conserva datos entre reinicios
     show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        "[format_sql]": false
   sql:
     init:
       mode: never # En producción, no cargar datos automáticamente
 
+  # Configuración para archivos CSV
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
 server:
   port: 8080
+
+# Logging para producción
+logging:
+  level:
+    "[com.josue.pedidos_ms]": INFO
+    "[org.hibernate.SQL]": ERROR

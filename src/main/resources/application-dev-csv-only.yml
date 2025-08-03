@@ -10,11 +10,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    # Asegurar que data.sql se ejecute después de crear las tablas
-    defer-datasource-initialization: true
+    # NO cargar data.sql automáticamente
+    defer-datasource-initialization: false
   sql:
     init:
-      mode: always
+      mode: never
 
 server:
   port: 8080

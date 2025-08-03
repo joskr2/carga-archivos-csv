@@ -6,9 +6,11 @@ import com.josue.pedidos_ms.infrastructure.repository.ClienteRepository;
 import com.josue.pedidos_ms.infrastructure.repository.ZonaRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("dev") // Solo se activa en perfil de desarrollo
 public class DataInitializer {
 
   @Autowired
