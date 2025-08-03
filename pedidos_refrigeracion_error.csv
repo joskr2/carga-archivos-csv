@@ -1,0 +1,2 @@
+numeroPedido,clienteId,fechaEntrega,estado,zonaEntrega,requiereRefrigeracion
+P200,CLI-123,2025-08-10,PENDIENTE,ZONA5,true
