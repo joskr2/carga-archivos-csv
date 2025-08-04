@@ -38,6 +38,7 @@ public class CargarPedidosUseCase extends BaseLogger {
 
   public ResultadoCargaResponse procesarArchivo(MultipartFile file) {
     LogContext.setOperacion("CARGA_CSV");
+    long inicioTiempo = System.currentTimeMillis();
 
     logInfo(LogEvents.INICIO_CARGA_CSV,
         "Iniciando procesamiento de archivo: {} (tamaño: {} bytes)",
@@ -46,7 +47,7 @@ public class CargarPedidosUseCase extends BaseLogger {
     int total = 0;
     int guardados = 0;
     List<Pedido> pedidosValidos = new ArrayList<>();
-    Map<String, List<Map<String, Object>>> erroresAgrupados = new HashMap<>();
+    List<ResultadoCargaResponse.ErrorDetalle> errores = new ArrayList<>();
 
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
         CSVReader csvReader = new CSVReader(reader)) {
@@ -60,14 +61,18 @@ public class CargarPedidosUseCase extends BaseLogger {
             "Error al leer archivo CSV: {}", file.getOriginalFilename(), e);
         throw new CsvValidationException("Archivo CSV ilegible o mal formateado: " + e.getMessage(), e);
       }
+
       if (filas.size() <= 1) {
         logWarn(LogEvents.ARCHIVO_VACIO,
             "Archivo CSV vacío o solo con cabecera: {} filas", filas.size());
         LogContext.clear();
+        long tiempoProcesamiento = System.currentTimeMillis() - inicioTiempo;
         return new ResultadoCargaResponse(
             0,
             0,
-            Map.of("Archivo vacío", List.of(Map.of("linea", 0, "motivo", "El archivo no contiene datos"))));
+            List.of(new ResultadoCargaResponse.ErrorDetalle(0, "", "El archivo no contiene datos", "ARCHIVO_VACIO")),
+            UUID.randomUUID().toString(),
+            tiempoProcesamiento);
       }
 
       logInfo(LogEvents.INICIO_CARGA_CSV,
@@ -79,10 +84,11 @@ public class CargarPedidosUseCase extends BaseLogger {
 
         // Validar que la fila tenga todos los campos
         if (campos.length < 6) {
-          String error = "Fila incompleta";
-          erroresAgrupados
-              .computeIfAbsent(error, k -> new ArrayList<>())
-              .add(Map.of("linea", i + 1, "motivo", "Faltan campos en la fila"));
+          errores.add(new ResultadoCargaResponse.ErrorDetalle(
+              i + 1,
+              campos.length > 0 ? campos[0] : "N/A",
+              "Faltan campos en la fila",
+              "FILA_INCOMPLETA"));
           continue;
         }
 
@@ -97,19 +103,21 @@ public class CargarPedidosUseCase extends BaseLogger {
         // Establecer contexto del pedido actual
         LogContext.setPedido(dto.getNumeroPedido());
 
-        List<String> errores = validar(dto);
-        if (errores.isEmpty()) {
+        List<String> erroresValidacion = validar(dto);
+        if (erroresValidacion.isEmpty()) {
           Pedido pedido = convertirADominio(dto);
           pedidosValidos.add(pedido);
           logDebug(LogEvents.PEDIDO_PROCESADO,
               "Pedido válido agregado para guardado: {}", dto.getNumeroPedido());
         } else {
           logWarn(LogEvents.PEDIDO_INVALIDO,
-              "Pedido con {} errores de validación", errores.size());
-          for (String error : errores) {
-            erroresAgrupados
-                .computeIfAbsent(error, k -> new ArrayList<>())
-                .add(Map.of("linea", i + 1, "motivo", error));
+              "Pedido con {} errores de validación", erroresValidacion.size());
+          for (String error : erroresValidacion) {
+            errores.add(new ResultadoCargaResponse.ErrorDetalle(
+                i + 1,
+                dto.getNumeroPedido(),
+                error,
+                "VALIDACION"));
           }
         }
       }
@@ -131,7 +139,7 @@ public class CargarPedidosUseCase extends BaseLogger {
     } catch (Exception e) {
       logError(LogEvents.ERROR_LECTURA_CSV,
           "Error general al procesar archivo CSV", e);
-      erroresAgrupados.put("Error general", List.of(Map.of("linea", 0, "motivo", e.getMessage())));
+      errores.add(new ResultadoCargaResponse.ErrorDetalle(0, "", e.getMessage(), "ERROR_SISTEMA"));
     } finally {
       LogContext.clear();
     }
@@ -139,9 +147,12 @@ public class CargarPedidosUseCase extends BaseLogger {
     // Log de resumen final
     logInfo(LogEvents.RESUMEN_PROCESAMIENTO,
         "Procesamiento completado - Total: {}, Guardados: {}, Errores: {}",
-        total, guardados, erroresAgrupados.size());
+        total, guardados, errores.size());
 
-    return new ResultadoCargaResponse(total, guardados, erroresAgrupados);
+    long tiempoProcesamiento = System.currentTimeMillis() - inicioTiempo;
+    String requestId = UUID.randomUUID().toString();
+
+    return new ResultadoCargaResponse(total, guardados, errores, requestId, tiempoProcesamiento);
   }
 
   private List<String> validar(PedidoCsvDTO dto) {

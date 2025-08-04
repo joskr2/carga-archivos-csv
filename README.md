@@ -2,7 +2,7 @@
 
 Microservicio para **cargar pedidos desde archivos CSV** con validaciones de negocio y arquitectura hexagonal.
 
-##  Quick Start
+## Quick Start
 
 ```bash
 # 1. Configurar variables de entorno (OBLIGATORIO)

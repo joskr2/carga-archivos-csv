@@ -1,7 +1,7 @@
 package com.josue.pedidos_ms.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import java.util.Map;
 
 /**
  * DTO para la respuesta de carga de pedidos.
@@ -9,17 +9,21 @@ import java.util.Map;
  * endpoint.
  */
 public record ResultadoCargaResponse(
-    int totalRegistros,
-    int guardados,
-    Map<String, List<Map<String, Object>>> errores,
-    String requestId,
-    String tiempoProcesamiento) {
+    @JsonProperty("totalRegistros") int totalRegistros,
+
+    @JsonProperty("registrosGuardados") int registrosGuardados,
+
+    @JsonProperty("errores") List<ErrorDetalle> errores,
+
+    @JsonProperty("requestId") String requestId,
+
+    @JsonProperty("tiempoProcesamiento") long tiempoProcesamiento) {
 
   /**
    * Constructor sin información de request (para errores tempranos)
    */
-  public ResultadoCargaResponse(int totalRegistros, int guardados, Map<String, List<Map<String, Object>>> errores) {
-    this(totalRegistros, guardados, errores, null, null);
+  public ResultadoCargaResponse(int totalRegistros, int registrosGuardados, List<ErrorDetalle> errores) {
+    this(totalRegistros, registrosGuardados, errores, null, 0);
   }
 
   /**
@@ -30,13 +34,15 @@ public record ResultadoCargaResponse(
   }
 
   /**
-   * Cuenta el total de errores individuales
+   * DTO para los detalles de cada error encontrado
    */
-  public int totalErrores() {
-    if (errores == null)
-      return 0;
-    return errores.values().stream()
-        .mapToInt(List::size)
-        .sum();
+  public record ErrorDetalle(
+      @JsonProperty("linea") int linea,
+
+      @JsonProperty("numeroPedido") String numeroPedido,
+
+      @JsonProperty("motivo") String motivo,
+
+      @JsonProperty("tipo") String tipo) {
   }
 }

@@ -75,7 +75,7 @@ class CargarPedidosUseCaseTest {
     ResultadoCargaResponse resultado = useCase.procesarArchivo(file);
 
     assertEquals(2, resultado.totalRegistros());
-    assertEquals(1, resultado.guardados());
-    assertTrue(resultado.errores().containsKey("Clientes no encontrados"));
+    assertEquals(1, resultado.registrosGuardados());
+    assertTrue(resultado.tieneErrores());
   }
 }

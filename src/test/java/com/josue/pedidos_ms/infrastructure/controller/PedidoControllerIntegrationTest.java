@@ -51,7 +51,7 @@ class PedidoControllerIntegrationTest {
         .file(file))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.totalRegistros").value(1))
-        .andExpect(jsonPath("$.guardados").value(1))
+        .andExpect(jsonPath("$.registrosGuardados").value(1))
         .andExpect(jsonPath("$.errores").isEmpty());
   }
 }

@@ -13,10 +13,10 @@ public class CorsConfig implements WebMvcConfigurer {
   @Override
   public void addCorsMappings(@NonNull CorsRegistry registry) {
     registry.addMapping("/**")
-        .allowedOrigins("*") // ⚠️ SOLO PARA DESARROLLO - PERMITE TODO
-        .allowedMethods("*") // ⚠️ SOLO PARA DESARROLLO - PERMITE TODOS LOS MÉTODOS
-        .allowedHeaders("*") // ⚠️ SOLO PARA DESARROLLO - PERMITE TODOS LOS HEADERS
-        .allowCredentials(false) // Debe ser false cuando allowedOrigins es "*"
+        .allowedOrigins("*") 
+        .allowedMethods("*")
+        .allowedHeaders("*")
+        .allowCredentials(false)
         .maxAge(3600);
   }
 }

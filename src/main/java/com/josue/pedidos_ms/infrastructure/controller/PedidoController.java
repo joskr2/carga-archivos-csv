@@ -50,38 +50,40 @@ public class PedidoController extends BaseLogger {
       }
 
       // Procesar archivo
-      long inicioTiempo = System.currentTimeMillis();
       ResultadoCargaResponse resultado = cargarPedidosUseCase.procesarArchivo(file);
-      long tiempoProcesamiento = System.currentTimeMillis() - inicioTiempo;
-
-      // Crear respuesta completa con información de request
-      ResultadoCargaResponse respuesta = new ResultadoCargaResponse(
-          resultado.totalRegistros(),
-          resultado.guardados(),
-          resultado.errores(),
-          requestId,
-          tiempoProcesamiento + "ms");
 
       // Log del resultado
       logInfo(LogEvents.FIN_CARGA_CSV,
-          "Request ID: {} - Procesamiento completado en {}ms - Total: {}, Guardados: {}, Tipos de errores: {}",
-          requestId, tiempoProcesamiento, resultado.totalRegistros(), resultado.guardados(),
+          "Request ID: {} - Procesamiento completado en {}ms - Total: {}, Guardados: {}, Errores: {}",
+          requestId, resultado.tiempoProcesamiento(), resultado.totalRegistros(), resultado.registrosGuardados(),
           resultado.errores().size());
 
       // Determinar código de estado HTTP basado en el resultado
-      if (resultado.tieneErrores()) {
+      if (resultado.tieneErrores() && resultado.registrosGuardados() == 0) {
+        // Ningún registro fue guardado (todos tienen errores)
         logWarn(LogEvents.ESTADISTICAS_VALIDACION,
-            "Request ID: {} - Errores de validación encontrados: {} errores totales",
-            requestId, resultado.totalErrores());
+            "Request ID: {} - Ningún registro válido encontrado - {} errores totales",
+            requestId, resultado.errores().size());
 
-        // HTTP 422: Datos válidos pero con errores de negocio
+        // HTTP 422: Datos con errores de validación, nada guardado
         return ResponseEntity
             .status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .body(respuesta);
+            .body(resultado);
+      }
+
+      if (resultado.tieneErrores() && resultado.registrosGuardados() > 0) {
+        // Algunos registros fueron guardados, otros tienen errores (procesamiento
+        // parcial)
+        logWarn(LogEvents.ESTADISTICAS_VALIDACION,
+            "Request ID: {} - Procesamiento parcial - Guardados: {}, Errores: {}",
+            requestId, resultado.registrosGuardados(), resultado.errores().size());
+
+        // HTTP 200: Procesamiento parcial exitoso
+        return ResponseEntity.ok(resultado);
       }
 
       // HTTP 200: Todo procesado exitosamente
-      return ResponseEntity.ok(respuesta);
+      return ResponseEntity.ok(resultado);
 
     } finally {
       LogContext.clear();
