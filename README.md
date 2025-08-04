@@ -82,11 +82,17 @@ SPRING_DATASOURCE_PASSWORD=your_secure_password
 #### Ejecutar con Makefile
 
 ```bash
-# Para desarrollo
+# Ejecutar tests
+make test
+
+# Para desarrollo (compila automáticamente en Docker)
 make up-dev
 
-# Para producción
+# Para producción (compila automáticamente en Docker)
 make up-prod
+
+# Compilar JAR localmente (opcional)
+make build-local
 
 # Para limpiar contenedores
 make clean
@@ -95,15 +101,22 @@ make clean
 #### Ejecutar manualmente
 
 ```bash
-# 1. Compilar
-./mvnw clean package -DskipTests
-
-# 2. Copiar configuración de desarrollo
+# Desarrollo (Docker compilará automáticamente)
 cp .env.dev .env
+docker-compose --env-file .env.dev up --build
 
-# 3. Ejecutar contenedores
-docker-compose up --build
+# O crear imagen standalone
+docker build -t pedidos-ms .
 ```
+
+> **📝 Nota importante:**
+>
+> El Dockerfile ahora utiliza **multi-stage build** que:
+>
+> - ✅ Compila el código fuente automáticamente
+> - ✅ No requiere tener el JAR pre-compilado
+> - ✅ Optimiza el tamaño de la imagen final
+> - ✅ Utiliza cache de dependencias Maven
 
 ### Opción 2: Ejecución local con H2
 

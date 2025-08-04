@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Build artifacts
+target/
+*.jar
+*.class
+
+# Logs
+*.log
+
+# Environment files
+.env*
+
+# Docker
+dockerfile
+docker-compose.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven wrapper (keep mvnw and mvnw.cmd)
+# .mvn/
+
+# Test reports
+test-results/
+
+# Documentation
+README.md
+docs/
+
+# CSV files (unless needed for the app)
+*.csv
