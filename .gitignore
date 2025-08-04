@@ -37,3 +37,4 @@ src/main/resources/data.sql
 .env.local
 .env.dev
 .env.prod
+logs/pedidos-ms.log
