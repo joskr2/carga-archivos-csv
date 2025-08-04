@@ -1,3 +1,21 @@
 spring:
   profiles:
     active: dev
+
+# Configuración de logging
+logging:
+  level:
+    root: INFO
+    "[com.josue.pedidos_ms]": DEBUG
+    "[org.springframework.web]": INFO
+    "[org.hibernate]": WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{pedido:-}] [%X{operacion:-}] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{pedido:-}] [%X{operacion:-}] %logger{36} - %msg%n"
+  file:
+    name: logs/pedidos-ms.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
+      total-size-cap: 1GB

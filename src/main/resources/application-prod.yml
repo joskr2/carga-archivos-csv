@@ -27,5 +27,14 @@ server:
 # Logging para producción
 logging:
   level:
+    root: WARN
     "[com.josue.pedidos_ms]": INFO
     "[org.hibernate.SQL]": ERROR
+    "[org.springframework]": WARN
+  file:
+    name: logs/pedidos-ms-prod.log
+  logback:
+    rollingpolicy:
+      max-file-size: 50MB
+      max-history: 90
+      total-size-cap: 5GB

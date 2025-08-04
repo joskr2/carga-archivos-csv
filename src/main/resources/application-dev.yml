@@ -18,3 +18,13 @@ spring:
 
 server:
   port: 8080
+
+# Logging más detallado para desarrollo
+logging:
+  level:
+    "[com.josue.pedidos_ms]": DEBUG
+    "[org.springframework.web]": DEBUG
+    "[org.hibernate.SQL]": DEBUG
+    "[org.hibernate.type.descriptor.sql.BasicBinder]": TRACE
+  file:
+    name: logs/pedidos-ms-dev.log

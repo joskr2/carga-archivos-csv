@@ -2,6 +2,7 @@ package com.josue.pedidos_ms.usecase;
 
 import com.josue.pedidos_ms.application.usecase.CargarPedidosUseCase;
 import com.josue.pedidos_ms.domain.model.*;
+import com.josue.pedidos_ms.domain.service.*;
 import com.josue.pedidos_ms.infrastructure.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,11 @@ class CargarPedidosUseCaseTest {
   private PedidoRepository pedidoRepository;
   private ClienteRepository clienteRepository;
   private ZonaRepository zonaRepository;
+  private PedidoValidator pedidoValidator;
+  private ClienteValidator clienteValidator;
+  private ZonaValidator zonaValidator;
+  private EstadoValidator estadoValidator;
+  private FechaValidator fechaValidator;
   private CargarPedidosUseCase useCase;
 
   @BeforeEach
@@ -26,7 +32,21 @@ class CargarPedidosUseCaseTest {
     pedidoRepository = mock(PedidoRepository.class);
     clienteRepository = mock(ClienteRepository.class);
     zonaRepository = mock(ZonaRepository.class);
-    useCase = new CargarPedidosUseCase(pedidoRepository, clienteRepository, zonaRepository);
+    pedidoValidator = new PedidoValidator(pedidoRepository);
+    clienteValidator = new ClienteValidator(clienteRepository);
+    zonaValidator = new ZonaValidator(zonaRepository);
+    estadoValidator = new EstadoValidator();
+    fechaValidator = new FechaValidator();
+
+    useCase = new CargarPedidosUseCase(
+        pedidoRepository,
+        clienteRepository,
+        zonaRepository,
+        pedidoValidator,
+        clienteValidator,
+        zonaValidator,
+        estadoValidator,
+        fechaValidator);
   }
 
   @Test
