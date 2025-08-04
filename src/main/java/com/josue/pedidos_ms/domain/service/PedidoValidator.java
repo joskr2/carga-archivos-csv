@@ -46,7 +46,7 @@ public class PedidoValidator extends BaseLogger {
         return errores;
       }
 
-      if (pedidoRepository.existsById(numeroPedido)) {
+      if (pedidoRepository.existePedido(numeroPedido)) {
         String error = "Número de pedido duplicado";
         logWarn(LogEvents.PEDIDO_INVALIDO,
             "Número de pedido duplicado en base de datos: {}", numeroPedido);

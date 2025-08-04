@@ -46,7 +46,7 @@ public class ZonaValidator extends BaseLogger {
         return errores;
       }
 
-      Zona zona = zonaRepository.findById(zonaId).orElse(null);
+      Zona zona = zonaRepository.buscarZona(zonaId).orElse(null);
       if (zona == null) {
         String error = "Zonas inválidas";
         logWarn(LogEvents.PEDIDO_INVALIDO,

@@ -2244,3 +2244,892 @@ com.opencsv.exceptions.CsvMalformedLineException: Unterminated quoted field at e
 2025-08-04 07:48:48.434 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
 2025-08-04 07:48:48.435 [SpringApplicationShutdownHook] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Shutdown initiated...
 2025-08-04 07:48:48.436 [SpringApplicationShutdownHook] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Shutdown completed.
+2025-08-04 08:01:51.562 [main] INFO  [] [] c.j.p.PedidosMsApplicationTests - Starting PedidosMsApplicationTests using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:51.563 [main] DEBUG [] [] c.j.p.PedidosMsApplicationTests - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:51.563 [main] INFO  [] [] c.j.p.PedidosMsApplicationTests - The following 1 profile is active: "test"
+2025-08-04 08:01:52.044 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:01:52.077 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 27 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:01:52.488 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:01:52.503 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-04 08:01:52.598 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:01:52.599 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-04 08:01:52.613 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:01:53.055 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:53.058 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:53.058 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:53.061 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:01:53.064 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:01:53.065 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:01:53.065 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:01:53.071 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:01:53.074 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:53.198 [main] INFO  [] [] o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-04 08:01:53.862 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:01:53.906 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:53.924 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:53.927 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:53.928 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:53.929 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:01:53.931 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:53.932 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:53.933 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:53.934 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:53.995 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:01:54.456 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:01:54.468 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:01:54.509 [main] INFO  [] [] c.j.p.PedidosMsApplicationTests - Started PedidosMsApplicationTests in 3.162 seconds (process running for 3.79)
+2025-08-04 08:01:55.309 [main] INFO  [] [] o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.josue.pedidos_ms.infrastructure.controller.PedidoControllerIntegrationTest]: PedidoControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-04 08:01:55.643 [main] INFO  [] [] o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.josue.pedidos_ms.PedidosMsApplication for test class com.josue.pedidos_ms.infrastructure.controller.PedidoControllerIntegrationTest
+2025-08-04 08:01:55.870 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:01:56.663 [main] INFO  [] [] c.j.p.i.c.PedidoControllerIntegrationTest - Starting PedidoControllerIntegrationTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:56.689 [main] DEBUG [] [] c.j.p.i.c.PedidoControllerIntegrationTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:56.689 [main] INFO  [] [] c.j.p.i.c.PedidoControllerIntegrationTest - The following 1 profile is active: "test"
+2025-08-04 08:01:57.712 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:01:57.731 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:01:57.797 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:01:57.801 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-08-04 08:01:57.804 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:01:57.804 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-08-04 08:01:57.808 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:01:57.828 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:57.830 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:57.831 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:57.833 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:01:57.834 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:01:57.836 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:01:57.837 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:01:57.839 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:01:57.840 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:57.877 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:01:57.884 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:57.885 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:57.886 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:57.887 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:57.889 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:01:57.891 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:57.892 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:57.892 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:57.893 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:57.906 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:01:57.976 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:01:58.007 [main] INFO  [] [] o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-08-04 08:01:58.008 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-08-04 08:01:58.010 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:01:58.013 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Completed initialization in 5 ms
+2025-08-04 08:01:58.031 [main] INFO  [] [] c.j.p.i.c.PedidoControllerIntegrationTest - Started PedidoControllerIntegrationTest in 2.186 seconds (process running for 7.311)
+2025-08-04 08:01:58.036 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.039 [main] DEBUG [] [] org.hibernate.SQL - update cliente set nombre=? where id=?
+2025-08-04 08:01:58.042 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.100 [main] INFO  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [INICIO_CARGA_CSV] POST /pedidos/cargar - Request ID: cd5df97a - Archivo: pedidos.csv - Tamaño: 122 bytes
+2025-08-04 08:01:58.101 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Iniciando procesamiento de archivo: pedidos.csv (tamaño: 122 bytes)
+2025-08-04 08:01:58.107 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Procesando 1 filas de datos (excluyendo cabecera)
+2025-08-04 08:01:58.108 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_VALIDACION] Iniciando validación completa de pedido: P001
+2025-08-04 08:01:58.108 [main] INFO  [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [INICIO_VALIDACION] Validando número de pedido: P001
+2025-08-04 08:01:58.122 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select count(p1_0.numero_pedido)>0 from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:01:58.125 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [PEDIDO_VALIDO] Número de pedido único y válido: P001
+2025-08-04 08:01:58.125 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [INICIO_VALIDACION] Validando cliente: CLI-123
+2025-08-04 08:01:58.127 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.128 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [PEDIDO_VALIDO] Cliente válido encontrado: CLI-123 - Test Cliente
+2025-08-04 08:01:58.128 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [INICIO_VALIDACION] Validando fecha de entrega: 2099-08-10
+2025-08-04 08:01:58.129 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [PEDIDO_VALIDO] Fecha de entrega válida: 2099-08-10 (días desde hoy: 27034)
+2025-08-04 08:01:58.129 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [INICIO_VALIDACION] Validando estado: PENDIENTE
+2025-08-04 08:01:58.129 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [PEDIDO_VALIDO] Estado válido: PENDIENTE
+2025-08-04 08:01:58.129 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [INICIO_VALIDACION] Validando zona: ZONA1 con refrigeración: true
+2025-08-04 08:01:58.130 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.132 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [PEDIDO_VALIDO] Zona válida: ZONA1 - Soporte refrigeración: true - Requerido: true
+2025-08-04 08:01:58.132 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_VALIDO] Todas las validaciones pasaron exitosamente
+2025-08-04 08:01:58.132 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Convirtiendo DTO a entidad de dominio: P001
+2025-08-04 08:01:58.133 [main] DEBUG [P001] [CONVERSION] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.134 [main] DEBUG [P001] [CONVERSION] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.134 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Conversión exitosa - Pedido: P001, Cliente: CLI-123, Fecha: 2099-08-10, Estado: PENDIENTE, Zona: ZONA1, Refrigeración: true
+2025-08-04 08:01:58.134 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Pedido válido agregado para guardado: P001
+2025-08-04 08:01:58.134 [main] INFO  [P001] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardando 1 pedidos válidos en base de datos
+2025-08-04 08:01:58.136 [main] DEBUG [P001] [PERSISTENCIA] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:01:58.140 [main] DEBUG [P001] [PERSISTENCIA] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:01:58.142 [main] INFO  [P001] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardados exitosamente 1 pedidos
+2025-08-04 08:01:58.142 [main] INFO  [] [] c.j.p.a.usecase.CargarPedidosUseCase - [RESUMEN_PROCESAMIENTO] Procesamiento completado - Total: 1, Guardados: 1, Errores: 0
+2025-08-04 08:01:58.142 [main] INFO  [] [] c.j.p.i.controller.PedidoController - [FIN_CARGA_CSV] Request ID: cd5df97a - Procesamiento completado en 41ms - Total: 1, Guardados: 1, Tipos de errores: 0
+2025-08-04 08:01:58.197 [main] INFO  [] [] o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.josue.pedidos_ms.infrastructure.controller.PedidoControllerHttpStatusTest]: PedidoControllerHttpStatusTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-04 08:01:58.199 [main] INFO  [] [] o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.josue.pedidos_ms.PedidosMsApplication for test class com.josue.pedidos_ms.infrastructure.controller.PedidoControllerHttpStatusTest
+2025-08-04 08:01:58.204 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:58.205 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:58.205 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:58.206 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:58.207 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-08-04 08:01:58.209 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-08-04 08:01:58.211 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:01:58.228 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Starting PedidoControllerHttpStatusTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:58.228 [main] DEBUG [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:58.228 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - The following 1 profile is active: "test"
+2025-08-04 08:01:58.381 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:01:58.386 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:01:58.440 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:01:58.440 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-08-04 08:01:58.441 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection conn20: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:01:58.442 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-08-04 08:01:58.443 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:01:58.460 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:58.461 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:58.461 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:58.461 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:01:58.462 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:01:58.463 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:01:58.463 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:01:58.464 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:01:58.465 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:58.493 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:01:58.498 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.499 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:58.500 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.501 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:58.502 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:01:58.503 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.504 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:58.505 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.505 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:58.516 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:01:58.572 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:01:58.576 [main] INFO  [] [] o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-08-04 08:01:58.576 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-08-04 08:01:58.577 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:01:58.580 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Completed initialization in 4 ms
+2025-08-04 08:01:58.589 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Started PedidoControllerHttpStatusTest in 0.378 seconds (process running for 7.87)
+2025-08-04 08:01:58.600 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0
+2025-08-04 08:01:58.603 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0
+2025-08-04 08:01:58.605 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:58.606 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:58.606 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:58.607 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:58.608 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.610 [main] INFO  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [INICIO_CARGA_CSV] POST /pedidos/cargar - Request ID: 89202f7a - Archivo: pedidos.csv - Tamaño: 122 bytes
+2025-08-04 08:01:58.610 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Iniciando procesamiento de archivo: pedidos.csv (tamaño: 122 bytes)
+2025-08-04 08:01:58.610 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Procesando 1 filas de datos (excluyendo cabecera)
+2025-08-04 08:01:58.610 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_VALIDACION] Iniciando validación completa de pedido: P001
+2025-08-04 08:01:58.610 [main] INFO  [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [INICIO_VALIDACION] Validando número de pedido: P001
+2025-08-04 08:01:58.612 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select count(p1_0.numero_pedido)>0 from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:01:58.612 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [PEDIDO_VALIDO] Número de pedido único y válido: P001
+2025-08-04 08:01:58.612 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [INICIO_VALIDACION] Validando cliente: CLI-123
+2025-08-04 08:01:58.614 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:58.614 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:58.614 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.615 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [PEDIDO_VALIDO] Cliente válido encontrado: CLI-123 - Test Cliente
+2025-08-04 08:01:58.615 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [INICIO_VALIDACION] Validando fecha de entrega: 2099-08-10
+2025-08-04 08:01:58.615 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [PEDIDO_VALIDO] Fecha de entrega válida: 2099-08-10 (días desde hoy: 27034)
+2025-08-04 08:01:58.615 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [INICIO_VALIDACION] Validando estado: PENDIENTE
+2025-08-04 08:01:58.615 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [PEDIDO_VALIDO] Estado válido: PENDIENTE
+2025-08-04 08:01:58.616 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [INICIO_VALIDACION] Validando zona: ZONA1 con refrigeración: true
+2025-08-04 08:01:58.617 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.617 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [PEDIDO_VALIDO] Zona válida: ZONA1 - Soporte refrigeración: true - Requerido: true
+2025-08-04 08:01:58.617 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_VALIDO] Todas las validaciones pasaron exitosamente
+2025-08-04 08:01:58.617 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Convirtiendo DTO a entidad de dominio: P001
+2025-08-04 08:01:58.618 [main] DEBUG [P001] [CONVERSION] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.618 [main] DEBUG [P001] [CONVERSION] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.619 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Conversión exitosa - Pedido: P001, Cliente: CLI-123, Fecha: 2099-08-10, Estado: PENDIENTE, Zona: ZONA1, Refrigeración: true
+2025-08-04 08:01:58.619 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Pedido válido agregado para guardado: P001
+2025-08-04 08:01:58.619 [main] INFO  [P001] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardando 1 pedidos válidos en base de datos
+2025-08-04 08:01:58.620 [main] DEBUG [P001] [PERSISTENCIA] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:01:58.622 [main] INFO  [P001] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardados exitosamente 1 pedidos
+2025-08-04 08:01:58.622 [main] INFO  [] [] c.j.p.a.usecase.CargarPedidosUseCase - [RESUMEN_PROCESAMIENTO] Procesamiento completado - Total: 1, Guardados: 1, Errores: 0
+2025-08-04 08:01:58.622 [main] INFO  [] [] c.j.p.i.controller.PedidoController - [FIN_CARGA_CSV] Request ID: 89202f7a - Procesamiento completado en 12ms - Total: 1, Guardados: 1, Tipos de errores: 0
+2025-08-04 08:01:58.630 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:58.630 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:58.631 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:58.631 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:58.632 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2025-08-04 08:01:58.643 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2025-08-04 08:01:58.644 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:01:58.658 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Starting PedidoControllerHttpStatusTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:58.658 [main] DEBUG [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:58.658 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - The following 1 profile is active: "test"
+2025-08-04 08:01:58.753 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:01:58.759 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:01:58.791 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:01:58.791 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2025-08-04 08:01:58.792 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection conn24: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:01:58.792 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2025-08-04 08:01:58.792 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:01:58.806 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:58.806 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:58.806 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:58.806 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:01:58.807 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:01:58.808 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:01:58.808 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:01:58.809 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:01:58.810 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:58.835 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:01:58.843 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.844 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:58.845 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:58.845 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:58.846 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:01:58.847 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.848 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:58.849 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.849 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:58.859 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:01:58.904 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:01:58.907 [main] INFO  [] [] o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-08-04 08:01:58.908 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-08-04 08:01:58.909 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:01:58.912 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Completed initialization in 4 ms
+2025-08-04 08:01:58.921 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Started PedidoControllerHttpStatusTest in 0.277 seconds (process running for 8.202)
+2025-08-04 08:01:58.925 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0
+2025-08-04 08:01:58.927 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0
+2025-08-04 08:01:58.928 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:58.929 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:58.929 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:58.929 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:58.930 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:58.933 [main] INFO  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [INICIO_CARGA_CSV] POST /pedidos/cargar - Request ID: 8c8796dd - Archivo: pedidos.csv - Tamaño: 61 bytes
+2025-08-04 08:01:58.933 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Iniciando procesamiento de archivo: pedidos.csv (tamaño: 61 bytes)
+2025-08-04 08:01:58.939 [main] ERROR [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [[ERROR_LECTURA_CSV, pedidos.csv]] Error al leer archivo CSV: {}
+com.opencsv.exceptions.CsvMalformedLineException: Unterminated quoted field at end of CSV line. Beginning of lost text: [P001,CLI-123,2099-08-10
+]
+	at com.opencsv.CSVReader.primeNextRecord(CSVReader.java:245) ~[opencsv-5.8.jar:na]
+	at com.opencsv.CSVReader.flexibleRead(CSVReader.java:610) ~[opencsv-5.8.jar:na]
+	at com.opencsv.CSVReader.readNext(CSVReader.java:204) ~[opencsv-5.8.jar:na]
+	at com.opencsv.CSVReader.readAll(CSVReader.java:186) ~[opencsv-5.8.jar:na]
+	at com.josue.pedidos_ms.application.usecase.CargarPedidosUseCase.procesarArchivo(CargarPedidosUseCase.java:57) ~[classes/:na]
+	at com.josue.pedidos_ms.infrastructure.controller.PedidoController.cargarArchivo(PedidoController.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.43.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.9.jar:6.2.9]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.2.9.jar:6.2.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.43.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.9.jar:6.2.9]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.9.jar:6.2.9]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.2.9.jar:6.2.9]
+	at com.josue.pedidos_ms.infrastructure.controller.PedidoControllerHttpStatusTest.debeRetornar400CuandoElCsvEsMalformado(PedidoControllerHttpStatusTest.java:117) ~[test-classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:775) ~[junit-platform-commons-1.12.2.jar:1.12.2]
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479) ~[junit-platform-commons-1.12.2.jar:1.12.2]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:216) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:212) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:137) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:201) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:170) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:94) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:59) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:142) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:94) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:52) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:47) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:46) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:52) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:70) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:100) ~[.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40) ~[.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:520) ~[.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:748) ~[.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:443) ~[.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:211) ~[.cp/:na]
+2025-08-04 08:01:58.944 [main] WARN  [] [] c.j.p.i.c.GlobalExceptionHandler - [ERROR_LECTURA_CSV] Error de validación CSV: Archivo CSV ilegible o mal formateado: Unterminated quoted field at end of CSV line. Beginning of lost text: [P001,CLI-123,2099-08-10
+]
+2025-08-04 08:01:58.960 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:58.960 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:58.961 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:58.961 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:58.962 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown initiated...
+2025-08-04 08:01:58.965 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown completed.
+2025-08-04 08:01:58.967 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:01:58.995 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Starting PedidoControllerHttpStatusTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:58.996 [main] DEBUG [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:58.996 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - The following 1 profile is active: "test"
+2025-08-04 08:01:59.123 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:01:59.128 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:01:59.158 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:01:59.158 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2025-08-04 08:01:59.159 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-5 - Added connection conn27: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:01:59.159 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2025-08-04 08:01:59.159 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:01:59.172 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:59.172 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:59.172 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:59.173 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:01:59.173 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:01:59.174 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:01:59.174 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:01:59.175 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:01:59.176 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:59.199 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:01:59.204 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:59.204 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:59.205 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:59.206 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:59.207 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:01:59.209 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.210 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:59.211 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.211 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:59.221 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:01:59.270 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:01:59.274 [main] INFO  [] [] o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-08-04 08:01:59.274 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-08-04 08:01:59.275 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:01:59.277 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+2025-08-04 08:01:59.286 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Started PedidoControllerHttpStatusTest in 0.319 seconds (process running for 8.567)
+2025-08-04 08:01:59.290 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0
+2025-08-04 08:01:59.292 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0
+2025-08-04 08:01:59.294 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:59.294 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:59.295 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:59.295 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:59.296 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.298 [main] INFO  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [INICIO_CARGA_CSV] POST /pedidos/cargar - Request ID: d6a068d0 - Archivo: pedidos.csv - Tamaño: 0 bytes
+2025-08-04 08:01:59.298 [main] WARN  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [ARCHIVO_VACIO] Request ID: d6a068d0 - Archivo vacío recibido
+2025-08-04 08:01:59.298 [main] WARN  [] [] c.j.p.i.c.GlobalExceptionHandler - [ERROR_LECTURA_CSV] Error de validación CSV: El archivo está vacío
+2025-08-04 08:01:59.306 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:59.306 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:59.306 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:59.306 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:59.307 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown initiated...
+2025-08-04 08:01:59.335 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown completed.
+2025-08-04 08:01:59.337 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:01:59.348 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Starting PedidoControllerHttpStatusTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:59.348 [main] DEBUG [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:59.348 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - The following 1 profile is active: "test"
+2025-08-04 08:01:59.439 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:01:59.445 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:01:59.478 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:01:59.479 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+2025-08-04 08:01:59.479 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-6 - Added connection conn30: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:01:59.479 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+2025-08-04 08:01:59.480 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:01:59.492 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:59.493 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:59.493 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:59.493 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:01:59.494 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:01:59.495 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:01:59.495 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:01:59.496 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:01:59.497 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:59.527 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:01:59.531 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:59.532 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:59.533 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:59.533 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:59.534 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:01:59.536 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.536 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:59.537 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.537 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:59.548 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:01:59.600 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:01:59.603 [main] INFO  [] [] o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-08-04 08:01:59.603 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-08-04 08:01:59.604 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:01:59.607 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Completed initialization in 4 ms
+2025-08-04 08:01:59.622 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Started PedidoControllerHttpStatusTest in 0.285 seconds (process running for 8.903)
+2025-08-04 08:01:59.627 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0
+2025-08-04 08:01:59.628 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0
+2025-08-04 08:01:59.630 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:59.630 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:59.630 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:59.631 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:59.631 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.633 [main] INFO  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [INICIO_CARGA_CSV] POST /pedidos/cargar - Request ID: 362b1116 - Archivo: pedidos.csv - Tamaño: 147 bytes
+2025-08-04 08:01:59.634 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Iniciando procesamiento de archivo: pedidos.csv (tamaño: 147 bytes)
+2025-08-04 08:01:59.634 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Procesando 1 filas de datos (excluyendo cabecera)
+2025-08-04 08:01:59.634 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_VALIDACION] Iniciando validación completa de pedido: P001
+2025-08-04 08:01:59.634 [main] INFO  [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [INICIO_VALIDACION] Validando número de pedido: P001
+2025-08-04 08:01:59.635 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select count(p1_0.numero_pedido)>0 from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:01:59.636 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [PEDIDO_VALIDO] Número de pedido único y válido: P001
+2025-08-04 08:01:59.636 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [INICIO_VALIDACION] Validando cliente: CLI-INEXISTENTE
+2025-08-04 08:01:59.637 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:59.638 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:59.638 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:59.639 [main] WARN  [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [PEDIDO_INVALIDO] Cliente no encontrado en base de datos: CLI-INEXISTENTE
+2025-08-04 08:01:59.639 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [INICIO_VALIDACION] Validando fecha de entrega: 2020-01-01
+2025-08-04 08:01:59.639 [main] WARN  [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [PEDIDO_INVALIDO] Fecha de entrega en el pasado: 2020-01-01 (hoy: 2025-08-04)
+2025-08-04 08:01:59.639 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [INICIO_VALIDACION] Validando estado: ESTADO_INVALIDO
+2025-08-04 08:01:59.639 [main] WARN  [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [PEDIDO_INVALIDO] Estado inválido: ESTADO_INVALIDO. Estados válidos: PENDIENTE, CONFIRMADO, ENTREGADO
+2025-08-04 08:01:59.639 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [INICIO_VALIDACION] Validando zona: ZONA_INEXISTENTE con refrigeración: true
+2025-08-04 08:01:59.640 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.641 [main] WARN  [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [PEDIDO_INVALIDO] Zona no encontrada en base de datos: ZONA_INEXISTENTE
+2025-08-04 08:01:59.641 [main] INFO  [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [ESTADISTICAS_VALIDACION] Validación completada con 4 errores: [Clientes no encontrados, Fecha de entrega inválida, Estado inválido, Zonas inválidas]
+2025-08-04 08:01:59.641 [main] WARN  [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_INVALIDO] Pedido con 4 errores de validación
+2025-08-04 08:01:59.642 [main] INFO  [] [] c.j.p.a.usecase.CargarPedidosUseCase - [RESUMEN_PROCESAMIENTO] Procesamiento completado - Total: 1, Guardados: 0, Errores: 4
+2025-08-04 08:01:59.642 [main] INFO  [] [] c.j.p.i.controller.PedidoController - [FIN_CARGA_CSV] Request ID: 362b1116 - Procesamiento completado en 8ms - Total: 1, Guardados: 0, Tipos de errores: 4
+2025-08-04 08:01:59.642 [main] WARN  [] [] c.j.p.i.controller.PedidoController - [ESTADISTICAS_VALIDACION] Request ID: 362b1116 - Errores de validación encontrados: 4 errores totales
+2025-08-04 08:01:59.648 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:59.649 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:59.649 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:59.650 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:59.650 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Shutdown initiated...
+2025-08-04 08:01:59.655 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Shutdown completed.
+2025-08-04 08:01:59.657 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:01:59.671 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Starting PedidoControllerHttpStatusTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:59.671 [main] DEBUG [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:59.671 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - The following 1 profile is active: "test"
+2025-08-04 08:01:59.754 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:01:59.763 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:01:59.792 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:01:59.792 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Starting...
+2025-08-04 08:01:59.793 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-7 - Added connection conn33: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:01:59.793 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Start completed.
+2025-08-04 08:01:59.793 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:01:59.805 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:59.805 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:59.805 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:59.805 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:01:59.806 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:01:59.806 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:01:59.807 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:01:59.808 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:01:59.809 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:59.834 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:01:59.838 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:59.839 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:59.840 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:01:59.841 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:01:59.842 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:01:59.843 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.844 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:59.844 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.845 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:01:59.853 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:01:59.898 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:01:59.901 [main] INFO  [] [] o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-08-04 08:01:59.901 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-08-04 08:01:59.902 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:01:59.904 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+2025-08-04 08:01:59.911 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Started PedidoControllerHttpStatusTest in 0.254 seconds (process running for 9.192)
+2025-08-04 08:01:59.914 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0
+2025-08-04 08:01:59.915 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0
+2025-08-04 08:01:59.916 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:59.916 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:01:59.917 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:59.917 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:01:59.917 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:01:59.919 [main] INFO  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [INICIO_CARGA_CSV] POST /pedidos/cargar - Request ID: 94fad8f0 - Archivo: pedidos.txt - Tamaño: 9 bytes
+2025-08-04 08:01:59.919 [main] WARN  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [ERROR_LECTURA_CSV] Request ID: 94fad8f0 - Formato de archivo inválido: pedidos.txt
+2025-08-04 08:01:59.920 [main] WARN  [] [] c.j.p.i.c.GlobalExceptionHandler - [ERROR_LECTURA_CSV] Error de validación CSV: Solo se permiten archivos CSV
+2025-08-04 08:01:59.926 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:01:59.927 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:01:59.927 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:01:59.927 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:01:59.928 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Shutdown initiated...
+2025-08-04 08:01:59.931 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Shutdown completed.
+2025-08-04 08:01:59.932 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:01:59.944 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Starting PedidoControllerHttpStatusTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:01:59.944 [main] DEBUG [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:01:59.944 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - The following 1 profile is active: "test"
+2025-08-04 08:02:00.029 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:02:00.036 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:02:00.078 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:02:00.078 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Starting...
+2025-08-04 08:02:00.079 [main] INFO  [] [] com.zaxxer.hikari.pool.HikariPool - HikariPool-8 - Added connection conn35: url=jdbc:h2:mem:testdb user=SA
+2025-08-04 08:02:00.079 [main] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Start completed.
+2025-08-04 08:02:00.079 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:02:00.092 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:02:00.093 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:02:00.093 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:02:00.093 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:02:00.094 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:02:00.094 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:02:00.095 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:02:00.096 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:02:00.097 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:02:00.116 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from cliente c1_0
+2025-08-04 08:02:00.121 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:00.121 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:00.122 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:00.123 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:00.124 [main] DEBUG [] [] org.hibernate.SQL - select count(*) from zona z1_0
+2025-08-04 08:02:00.126 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.126 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:00.127 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.127 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:00.136 [main] WARN  [] [] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-04 08:02:00.178 [main] INFO  [] [] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-04 08:02:00.181 [main] INFO  [] [] o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-08-04 08:02:00.181 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-08-04 08:02:00.182 [main] INFO  [] [] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-08-04 08:02:00.184 [main] INFO  [] [] o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+2025-08-04 08:02:00.191 [main] INFO  [] [] c.j.p.i.c.PedidoControllerHttpStatusTest - Started PedidoControllerHttpStatusTest in 0.259 seconds (process running for 9.472)
+2025-08-04 08:02:00.195 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0
+2025-08-04 08:02:00.196 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0
+2025-08-04 08:02:00.197 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:02:00.198 [main] DEBUG [] [] org.hibernate.SQL - delete from cliente where id=?
+2025-08-04 08:02:00.198 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:02:00.198 [main] DEBUG [] [] org.hibernate.SQL - delete from zona where id=?
+2025-08-04 08:02:00.198 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.200 [main] INFO  [] [HTTP_REQUEST] c.j.p.i.controller.PedidoController - [INICIO_CARGA_CSV] POST /pedidos/cargar - Request ID: 53477409 - Archivo: pedidos.csv - Tamaño: 186 bytes
+2025-08-04 08:02:00.200 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Iniciando procesamiento de archivo: pedidos.csv (tamaño: 186 bytes)
+2025-08-04 08:02:00.200 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Procesando 2 filas de datos (excluyendo cabecera)
+2025-08-04 08:02:00.201 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_VALIDACION] Iniciando validación completa de pedido: P001
+2025-08-04 08:02:00.201 [main] INFO  [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [INICIO_VALIDACION] Validando número de pedido: P001
+2025-08-04 08:02:00.202 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select count(p1_0.numero_pedido)>0 from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:02:00.202 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [PEDIDO_VALIDO] Número de pedido único y válido: P001
+2025-08-04 08:02:00.202 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [INICIO_VALIDACION] Validando cliente: CLI-123
+2025-08-04 08:02:00.204 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:00.204 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:00.205 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:00.205 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [PEDIDO_VALIDO] Cliente válido encontrado: CLI-123 - Test Cliente
+2025-08-04 08:02:00.205 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [INICIO_VALIDACION] Validando fecha de entrega: 2099-08-10
+2025-08-04 08:02:00.206 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [PEDIDO_VALIDO] Fecha de entrega válida: 2099-08-10 (días desde hoy: 27034)
+2025-08-04 08:02:00.206 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [INICIO_VALIDACION] Validando estado: PENDIENTE
+2025-08-04 08:02:00.206 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [PEDIDO_VALIDO] Estado válido: PENDIENTE
+2025-08-04 08:02:00.206 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [INICIO_VALIDACION] Validando zona: ZONA1 con refrigeración: true
+2025-08-04 08:02:00.207 [main] DEBUG [P001] [CARGA_CSV] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.208 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [PEDIDO_VALIDO] Zona válida: ZONA1 - Soporte refrigeración: true - Requerido: true
+2025-08-04 08:02:00.208 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_VALIDO] Todas las validaciones pasaron exitosamente
+2025-08-04 08:02:00.208 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Convirtiendo DTO a entidad de dominio: P001
+2025-08-04 08:02:00.208 [main] DEBUG [P001] [CONVERSION] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:00.209 [main] DEBUG [P001] [CONVERSION] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.209 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Conversión exitosa - Pedido: P001, Cliente: CLI-123, Fecha: 2099-08-10, Estado: PENDIENTE, Zona: ZONA1, Refrigeración: true
+2025-08-04 08:02:00.209 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Pedido válido agregado para guardado: P001
+2025-08-04 08:02:00.209 [main] DEBUG [P002] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_VALIDACION] Iniciando validación completa de pedido: P002
+2025-08-04 08:02:00.209 [main] INFO  [P002] [CONVERSION] c.j.p.domain.service.PedidoValidator - [INICIO_VALIDACION] Validando número de pedido: P002
+2025-08-04 08:02:00.210 [main] DEBUG [P002] [CONVERSION] org.hibernate.SQL - select count(p1_0.numero_pedido)>0 from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:02:00.210 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.PedidoValidator - [PEDIDO_VALIDO] Número de pedido único y válido: P002
+2025-08-04 08:02:00.210 [main] DEBUG [P002] [CONVERSION] c.j.p.d.service.ClienteValidator - [INICIO_VALIDACION] Validando cliente: CLI-INEXISTENTE
+2025-08-04 08:02:00.210 [main] DEBUG [P002] [CONVERSION] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:00.210 [main] WARN  [P002] [CONVERSION] c.j.p.d.service.ClienteValidator - [PEDIDO_INVALIDO] Cliente no encontrado en base de datos: CLI-INEXISTENTE
+2025-08-04 08:02:00.211 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.FechaValidator - [INICIO_VALIDACION] Validando fecha de entrega: 2020-01-01
+2025-08-04 08:02:00.211 [main] WARN  [P002] [CONVERSION] c.j.p.domain.service.FechaValidator - [PEDIDO_INVALIDO] Fecha de entrega en el pasado: 2020-01-01 (hoy: 2025-08-04)
+2025-08-04 08:02:00.211 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.EstadoValidator - [INICIO_VALIDACION] Validando estado: INVALIDO
+2025-08-04 08:02:00.211 [main] WARN  [P002] [CONVERSION] c.j.p.domain.service.EstadoValidator - [PEDIDO_INVALIDO] Estado inválido: INVALIDO. Estados válidos: PENDIENTE, CONFIRMADO, ENTREGADO
+2025-08-04 08:02:00.211 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.ZonaValidator - [INICIO_VALIDACION] Validando zona: ZONA_INEXISTENTE con refrigeración: false
+2025-08-04 08:02:00.211 [main] DEBUG [P002] [CONVERSION] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.212 [main] WARN  [P002] [CONVERSION] c.j.p.domain.service.ZonaValidator - [PEDIDO_INVALIDO] Zona no encontrada en base de datos: ZONA_INEXISTENTE
+2025-08-04 08:02:00.212 [main] INFO  [P002] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [ESTADISTICAS_VALIDACION] Validación completada con 4 errores: [Clientes no encontrados, Fecha de entrega inválida, Estado inválido, Zonas inválidas]
+2025-08-04 08:02:00.212 [main] WARN  [P002] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_INVALIDO] Pedido con 4 errores de validación
+2025-08-04 08:02:00.212 [main] INFO  [P002] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardando 1 pedidos válidos en base de datos
+2025-08-04 08:02:00.213 [main] DEBUG [P002] [PERSISTENCIA] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:00.214 [main] INFO  [P002] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardados exitosamente 1 pedidos
+2025-08-04 08:02:00.214 [main] INFO  [] [] c.j.p.a.usecase.CargarPedidosUseCase - [RESUMEN_PROCESAMIENTO] Procesamiento completado - Total: 2, Guardados: 1, Errores: 4
+2025-08-04 08:02:00.214 [main] INFO  [] [] c.j.p.i.controller.PedidoController - [FIN_CARGA_CSV] Request ID: 53477409 - Procesamiento completado en 14ms - Total: 2, Guardados: 1, Tipos de errores: 4
+2025-08-04 08:02:00.214 [main] WARN  [] [] c.j.p.i.controller.PedidoController - [ESTADISTICAS_VALIDACION] Request ID: 53477409 - Errores de validación encontrados: 4 errores totales
+2025-08-04 08:02:00.497 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Iniciando procesamiento de archivo: pedidos.csv (tamaño: 167 bytes)
+2025-08-04 08:02:00.497 [main] INFO  [] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_CARGA_CSV] Procesando 2 filas de datos (excluyendo cabecera)
+2025-08-04 08:02:00.497 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_VALIDACION] Iniciando validación completa de pedido: P001
+2025-08-04 08:02:00.497 [main] INFO  [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [INICIO_VALIDACION] Validando número de pedido: P001
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.PedidoValidator - [PEDIDO_VALIDO] Número de pedido único y válido: P001
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [INICIO_VALIDACION] Validando cliente: CLI-123
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.d.service.ClienteValidator - [PEDIDO_VALIDO] Cliente válido encontrado: CLI-123 - Cliente Test
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [INICIO_VALIDACION] Validando fecha de entrega: 2099-08-10
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.FechaValidator - [PEDIDO_VALIDO] Fecha de entrega válida: 2099-08-10 (días desde hoy: 27034)
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [INICIO_VALIDACION] Validando estado: PENDIENTE
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.EstadoValidator - [PEDIDO_VALIDO] Estado válido: PENDIENTE
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [INICIO_VALIDACION] Validando zona: ZONA1 con refrigeración: true
+2025-08-04 08:02:00.499 [main] DEBUG [P001] [CARGA_CSV] c.j.p.domain.service.ZonaValidator - [PEDIDO_VALIDO] Zona válida: ZONA1 - Soporte refrigeración: true - Requerido: true
+2025-08-04 08:02:00.500 [main] DEBUG [P001] [CARGA_CSV] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_VALIDO] Todas las validaciones pasaron exitosamente
+2025-08-04 08:02:00.500 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Convirtiendo DTO a entidad de dominio: P001
+2025-08-04 08:02:00.500 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Conversión exitosa - Pedido: P001, Cliente: CLI-123, Fecha: 2099-08-10, Estado: PENDIENTE, Zona: ZONA1, Refrigeración: true
+2025-08-04 08:02:00.500 [main] DEBUG [P001] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_PROCESADO] Pedido válido agregado para guardado: P001
+2025-08-04 08:02:00.500 [main] DEBUG [P002] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [INICIO_VALIDACION] Iniciando validación completa de pedido: P002
+2025-08-04 08:02:00.500 [main] INFO  [P002] [CONVERSION] c.j.p.domain.service.PedidoValidator - [INICIO_VALIDACION] Validando número de pedido: P002
+2025-08-04 08:02:00.501 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.PedidoValidator - [PEDIDO_VALIDO] Número de pedido único y válido: P002
+2025-08-04 08:02:00.501 [main] DEBUG [P002] [CONVERSION] c.j.p.d.service.ClienteValidator - [INICIO_VALIDACION] Validando cliente: CLI-999
+2025-08-04 08:02:00.501 [main] WARN  [P002] [CONVERSION] c.j.p.d.service.ClienteValidator - [PEDIDO_INVALIDO] Cliente no encontrado en base de datos: CLI-999
+2025-08-04 08:02:00.501 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.FechaValidator - [INICIO_VALIDACION] Validando fecha de entrega: 2020-01-01
+2025-08-04 08:02:00.501 [main] WARN  [P002] [CONVERSION] c.j.p.domain.service.FechaValidator - [PEDIDO_INVALIDO] Fecha de entrega en el pasado: 2020-01-01 (hoy: 2025-08-04)
+2025-08-04 08:02:00.501 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.EstadoValidator - [INICIO_VALIDACION] Validando estado: INVALIDO
+2025-08-04 08:02:00.501 [main] WARN  [P002] [CONVERSION] c.j.p.domain.service.EstadoValidator - [PEDIDO_INVALIDO] Estado inválido: INVALIDO. Estados válidos: PENDIENTE, CONFIRMADO, ENTREGADO
+2025-08-04 08:02:00.501 [main] DEBUG [P002] [CONVERSION] c.j.p.domain.service.ZonaValidator - [INICIO_VALIDACION] Validando zona: ZONA2 con refrigeración: false
+2025-08-04 08:02:00.502 [main] WARN  [P002] [CONVERSION] c.j.p.domain.service.ZonaValidator - [PEDIDO_INVALIDO] Zona no encontrada en base de datos: ZONA2
+2025-08-04 08:02:00.502 [main] INFO  [P002] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [ESTADISTICAS_VALIDACION] Validación completada con 4 errores: [Clientes no encontrados, Fecha de entrega inválida, Estado inválido, Zonas inválidas]
+2025-08-04 08:02:00.502 [main] WARN  [P002] [CONVERSION] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_INVALIDO] Pedido con 4 errores de validación
+2025-08-04 08:02:00.502 [main] INFO  [P002] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardando 1 pedidos válidos en base de datos
+2025-08-04 08:02:00.503 [main] INFO  [P002] [PERSISTENCIA] c.j.p.a.usecase.CargarPedidosUseCase - [PEDIDO_GUARDADO] Guardados exitosamente 1 pedidos
+2025-08-04 08:02:00.503 [main] INFO  [] [] c.j.p.a.usecase.CargarPedidosUseCase - [RESUMEN_PROCESAMIENTO] Procesamiento completado - Total: 2, Guardados: 1, Errores: 4
+2025-08-04 08:02:00.517 [main] INFO  [] [] o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.josue.pedidos_ms.infrastructure.repository.RepositoryJpqlTest]: RepositoryJpqlTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-04 08:02:00.656 [main] INFO  [] [] o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.josue.pedidos_ms.PedidosMsApplication for test class com.josue.pedidos_ms.infrastructure.repository.RepositoryJpqlTest
+2025-08-04 08:02:00.679 [main] INFO  [] [] o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-08-04 08:02:00.711 [main] INFO  [] [] c.j.p.i.r.RepositoryJpqlTest - Starting RepositoryJpqlTest using Java 17.0.15 with PID 2148 (started by josuepatricio in /Users/josuepatricio/Downloads/pedidos-ms)
+2025-08-04 08:02:00.711 [main] DEBUG [] [] c.j.p.i.r.RepositoryJpqlTest - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-04 08:02:00.711 [main] INFO  [] [] c.j.p.i.r.RepositoryJpqlTest - The following 1 profile is active: "test"
+2025-08-04 08:02:00.792 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-04 08:02:00.803 [main] INFO  [] [] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 3 JPA repository interfaces.
+2025-08-04 08:02:00.813 [main] INFO  [] [] o.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
+2025-08-04 08:02:00.830 [main] INFO  [] [] o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:ccf1fc6c-1ed9-4a79-ab09-6ffa854d11f7;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2025-08-04 08:02:00.855 [main] INFO  [] [] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-04 08:02:00.857 [main] WARN  [] [] org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-04 08:02:00.879 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:02:00.879 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:02:00.880 [main] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:02:00.880 [main] DEBUG [] [] org.hibernate.SQL - create table cliente (id varchar(255) not null, nombre varchar(255), primary key (id))
+2025-08-04 08:02:00.882 [main] DEBUG [] [] org.hibernate.SQL - create table pedido (fecha_entrega date, requiere_refrigeracion boolean not null, cliente_id varchar(255) not null, numero_pedido varchar(255) not null, zona_entrega varchar(255) not null, estado enum ('CONFIRMADO','ENTREGADO','PENDIENTE'), primary key (numero_pedido))
+2025-08-04 08:02:00.883 [main] DEBUG [] [] org.hibernate.SQL - create table zona (soporte_refrigeracion boolean not null, id varchar(255) not null, primary key (id))
+2025-08-04 08:02:00.884 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK30s8j2ktpay6of18lbyqn3632 foreign key (cliente_id) references cliente
+2025-08-04 08:02:00.885 [main] DEBUG [] [] org.hibernate.SQL - alter table if exists pedido add constraint FK1aokin5yjk78h5cax5jju4fs9 foreign key (zona_entrega) references zona
+2025-08-04 08:02:00.887 [main] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:02:00.964 [main] INFO  [] [] c.j.p.i.r.RepositoryJpqlTest - Started RepositoryJpqlTest in 0.286 seconds (process running for 10.245)
+2025-08-04 08:02:00.971 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:00.974 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:00.976 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.976 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:00.977 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:00.979 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:00.987 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:00.988 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:00.988 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:00.989 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:00.989 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:00.990 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:00.990 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.soporte_refrigeracion=true order by z1_0.id
+2025-08-04 08:02:00.998 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.000 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.000 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.001 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.002 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.003 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.006 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.006 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.007 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.007 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.008 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.008 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.009 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.010 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.017 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.018 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.019 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.020 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.020 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.022 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.028 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.028 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.029 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.029 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.029 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.030 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.030 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.estado=? order by p1_0.fecha_entrega
+2025-08-04 08:02:01.037 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.042 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.042 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.043 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.044 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.045 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.047 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.048 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.048 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.048 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.049 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.049 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.049 [main] DEBUG [] [] org.hibernate.SQL - select count(p1_0.numero_pedido)>0 from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:02:01.051 [main] DEBUG [] [] org.hibernate.SQL - select count(p1_0.numero_pedido)>0 from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:02:01.057 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.058 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.059 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.060 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.061 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.062 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.064 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.065 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.065 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.066 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.066 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.066 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.067 [main] DEBUG [] [] org.hibernate.SQL - select count(c1_0.id)>0 from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.068 [main] DEBUG [] [] org.hibernate.SQL - select count(c1_0.id)>0 from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.073 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.074 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.074 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.075 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.076 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.077 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.078 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.079 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.079 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.079 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.080 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.080 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.081 [main] DEBUG [] [] org.hibernate.SQL - select count(z1_0.id)>0 from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.082 [main] DEBUG [] [] org.hibernate.SQL - select count(z1_0.id)>0 from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.087 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.090 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.091 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.092 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.092 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.093 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.098 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.098 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.098 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.099 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.099 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.100 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.101 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where c1_0.id=? order by p1_0.fecha_entrega desc
+2025-08-04 08:02:01.106 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.108 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.108 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.109 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.110 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.111 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.114 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.114 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.115 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.115 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.116 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.116 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.117 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.118 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.123 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.125 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.125 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.127 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.128 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.128 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.131 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.131 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.131 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.131 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.132 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.132 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.133 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 order by c1_0.nombre
+2025-08-04 08:02:01.140 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.143 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.144 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.145 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.146 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.147 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.149 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.150 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.150 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.150 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.151 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.151 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.152 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.soporte_refrigeracion=? order by z1_0.id
+2025-08-04 08:02:01.153 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.soporte_refrigeracion=? order by z1_0.id
+2025-08-04 08:02:01.159 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.161 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.161 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.163 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.164 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.165 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.166 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.169 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.169 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.169 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.170 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.170 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.170 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.171 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.172 [main] DEBUG [] [] org.hibernate.SQL - select count(p1_0.numero_pedido) from pedido p1_0 join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.requiere_refrigeracion=true and ze1_0.soporte_refrigeracion=false
+2025-08-04 08:02:01.177 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.179 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.181 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.182 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.182 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.183 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.189 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.195 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.196 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.196 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.196 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.200 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.200 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:02:01.203 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega from pedido p1_0 where p1_0.numero_pedido=?
+2025-08-04 08:02:01.218 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.220 [main] DEBUG [] [] org.hibernate.SQL - select c1_0.id,c1_0.nombre from cliente c1_0 where c1_0.id=?
+2025-08-04 08:02:01.221 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.222 [main] DEBUG [] [] org.hibernate.SQL - select z1_0.id,z1_0.soporte_refrigeracion from zona z1_0 where z1_0.id=?
+2025-08-04 08:02:01.223 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.224 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,c1_0.id,c1_0.nombre,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega,ze1_0.id,ze1_0.soporte_refrigeracion from pedido p1_0 join cliente c1_0 on c1_0.id=p1_0.cliente_id join zona ze1_0 on ze1_0.id=p1_0.zona_entrega where p1_0.numero_pedido=?
+2025-08-04 08:02:01.229 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.229 [main] DEBUG [] [] org.hibernate.SQL - insert into cliente (nombre,id) values (?,?)
+2025-08-04 08:02:01.230 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.230 [main] DEBUG [] [] org.hibernate.SQL - insert into zona (soporte_refrigeracion,id) values (?,?)
+2025-08-04 08:02:01.231 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.231 [main] DEBUG [] [] org.hibernate.SQL - insert into pedido (cliente_id,estado,fecha_entrega,requiere_refrigeracion,zona_entrega,numero_pedido) values (?,?,?,?,?,?)
+2025-08-04 08:02:01.231 [main] DEBUG [] [] org.hibernate.SQL - select p1_0.numero_pedido,p1_0.cliente_id,p1_0.estado,p1_0.fecha_entrega,p1_0.requiere_refrigeracion,p1_0.zona_entrega from pedido p1_0 where p1_0.fecha_entrega between ? and ? order by p1_0.fecha_entrega
+2025-08-04 08:02:01.241 [SpringApplicationShutdownHook] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:02:01.241 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:02:01.241 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:02:01.242 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:02:01.243 [SpringApplicationShutdownHook] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-04 08:02:01.244 [SpringApplicationShutdownHook] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-04 08:02:01.246 [SpringApplicationShutdownHook] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:02:01.246 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:02:01.247 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:02:01.247 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 
+2025-08-04 08:02:01.248 [SpringApplicationShutdownHook] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Shutdown initiated...
+2025-08-04 08:02:01.249 [SpringApplicationShutdownHook] INFO  [] [] com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Shutdown completed.
+2025-08-04 08:02:01.250 [SpringApplicationShutdownHook] INFO  [] [] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-04 08:02:01.250 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists cliente cascade 
+2025-08-04 08:02:01.251 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists pedido cascade 
+2025-08-04 08:02:01.251 [SpringApplicationShutdownHook] DEBUG [] [] org.hibernate.SQL - drop table if exists zona cascade 

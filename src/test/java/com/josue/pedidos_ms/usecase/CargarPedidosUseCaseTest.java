@@ -62,14 +62,14 @@ class CargarPedidosUseCaseTest {
         "text/csv",
         csv.getBytes(StandardCharsets.UTF_8));
 
-    // Setup mocks
-    when(pedidoRepository.existsById("P001")).thenReturn(false);
-    when(clienteRepository.findById("CLI-123")).thenReturn(Optional.of(new Cliente("CLI-123", "Cliente Test")));
-    when(zonaRepository.findById("ZONA1")).thenReturn(Optional.of(new Zona("ZONA1", true)));
+    // Setup mocks - Usando nuevos métodos JPQL
+    when(pedidoRepository.existePedido("P001")).thenReturn(false);
+    when(clienteRepository.buscarCliente("CLI-123")).thenReturn(Optional.of(new Cliente("CLI-123", "Cliente Test")));
+    when(zonaRepository.buscarZona("ZONA1")).thenReturn(Optional.of(new Zona("ZONA1", true)));
 
-    when(pedidoRepository.existsById("P002")).thenReturn(false);
-    when(clienteRepository.findById("CLI-999")).thenReturn(Optional.empty());
-    when(zonaRepository.findById("ZONA2")).thenReturn(Optional.empty());
+    when(pedidoRepository.existePedido("P002")).thenReturn(false);
+    when(clienteRepository.buscarCliente("CLI-999")).thenReturn(Optional.empty());
+    when(zonaRepository.buscarZona("ZONA2")).thenReturn(Optional.empty());
 
     // Ejecutar
     ResultadoCargaResponse resultado = useCase.procesarArchivo(file);

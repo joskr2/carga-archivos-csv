@@ -43,7 +43,7 @@ public class ClienteValidator extends BaseLogger {
         return errores;
       }
 
-      Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
+      Cliente cliente = clienteRepository.buscarCliente(clienteId).orElse(null);
       if (cliente == null) {
         String error = "Clientes no encontrados";
         logWarn(LogEvents.PEDIDO_INVALIDO,

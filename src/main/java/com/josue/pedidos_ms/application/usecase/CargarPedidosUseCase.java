@@ -177,10 +177,10 @@ public class CargarPedidosUseCase extends BaseLogger {
     try {
       Pedido pedido = Pedido.builder()
           .numeroPedido(dto.getNumeroPedido())
-          .cliente(clienteRepository.findById(dto.getClienteId()).get())
+          .cliente(clienteRepository.buscarCliente(dto.getClienteId()).get())
           .fechaEntrega(LocalDate.parse(dto.getFechaEntrega()))
           .estado(EstadoPedido.valueOf(dto.getEstado()))
-          .zonaEntrega(zonaRepository.findById(dto.getZonaEntrega()).get())
+          .zonaEntrega(zonaRepository.buscarZona(dto.getZonaEntrega()).get())
           .requiereRefrigeracion(Boolean.parseBoolean(dto.getRequiereRefrigeracion()))
           .build();
 
