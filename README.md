@@ -3,6 +3,18 @@
 Microservicio encargado de **cargar pedidos de envío desde un archivo CSV**, aplicando validaciones de negocio y persistiendo los registros válidos.  
 Cumple con la arquitectura **hexagonal** y los requisitos definidos en la prueba técnica.
 
+> ## 🚨 **ANTES DE EMPEZAR - CONFIGURACIÓN OBLIGATORIA**
+>
+> **⚠️ PASO CRÍTICO:** Para ejecutar con Docker, debes copiar y configurar las variables de entorno:
+>
+> ```bash
+> cp .env.dev.example .env.dev
+> cp .env.prod.example .env.prod
+> # ¡Edita los archivos y cambia "your_password_here" por contraseñas reales!
+> ```
+>
+> 📝 **Nota:** Los tests (`make test`) no requieren configuración y siempre funcionan con H2.
+
 ---
 
 ## 🛠️ Tecnologías utilizadas
@@ -36,6 +48,28 @@ Cumple con la arquitectura **hexagonal** y los requisitos definidos en la prueba
 
 ---
 
+## ⚡ Quick Start
+
+```bash
+# 1. Clonar repositorio
+git clone <tu-repo>
+cd pedidos-ms
+
+# 2. ⚠️ OBLIGATORIO: Configurar variables de entorno
+cp .env.dev.example .env.dev
+nano .env.dev  # Cambiar "your_dev_password_here" por contraseña real
+
+# 3. Ejecutar (Docker compilará automáticamente)
+make up-dev
+
+# O solo tests (no requiere configuración)
+make test
+```
+
+**🎯 ¡Ya funciona!** Endpoint disponible en: `http://localhost:8080/pedidos/cargar`
+
+---
+
 ## 🧪 Cómo ejecutar el proyecto localmente
 
 ### Opción 1: Con Docker (Recomendado)
@@ -45,44 +79,55 @@ Cumple con la arquitectura **hexagonal** y los requisitos definidos en la prueba
 - Docker y Docker Compose
 - Make (opcional, para usar comandos simplificados)
 
-#### Variables de entorno
+#### ⚠️ **CONFIGURACIÓN OBLIGATORIA: Variables de entorno**
 
-El proyecto utiliza archivos de configuración por entorno:
+🔴 **PASO CRÍTICO:** Antes de ejecutar el proyecto, **DEBES** copiar y configurar los archivos de variables de entorno:
 
-**Para desarrollo (.env.dev):**
+```bash
+# 1. Copiar plantillas de configuración
+cp .env.dev.example .env.dev
+cp .env.prod.example .env.prod
+
+# 2. Editar las contraseñas en los archivos copiados
+# ⚠️ CAMBIAR "your_dev_password_here" por tu contraseña real
+```
+
+**Para desarrollo (`.env.dev`):**
 
 ```bash
 # Database Configuration
 POSTGRES_DB=pedidosdb
 POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your_dev_password
+POSTGRES_PASSWORD=tu_contraseña_dev_aqui   # ⚠️ CAMBIAR ESTO
 
 # Spring Application Configuration
 SPRING_PROFILES_ACTIVE=dev
 SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/pedidosdb
 SPRING_DATASOURCE_USERNAME=postgres
-SPRING_DATASOURCE_PASSWORD=your_dev_password
+SPRING_DATASOURCE_PASSWORD=tu_contraseña_dev_aqui   # ⚠️ CAMBIAR ESTO
 ```
 
-**Para producción (.env.prod):**
+**Para producción (`.env.prod`):**
 
 ```bash
 # Database Configuration
 POSTGRES_DB=pedidosdb
-POSTGRES_USER=your_prod_user
-POSTGRES_PASSWORD=your_secure_password
+POSTGRES_USER=tu_usuario_prod    # ⚠️ CAMBIAR ESTO
+POSTGRES_PASSWORD=tu_contraseña_segura_prod   # ⚠️ CAMBIAR ESTO
 
 # Spring Application Configuration
 SPRING_PROFILES_ACTIVE=prod
 SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/pedidosdb
-SPRING_DATASOURCE_USERNAME=your_prod_user
-SPRING_DATASOURCE_PASSWORD=your_secure_password
+SPRING_DATASOURCE_USERNAME=tu_usuario_prod    # ⚠️ CAMBIAR ESTO
+SPRING_DATASOURCE_PASSWORD=tu_contraseña_segura_prod   # ⚠️ CAMBIAR ESTO
 ```
 
 #### Ejecutar con Makefile
 
 ```bash
-# Ejecutar tests
+# ⚠️ IMPORTANTE: Configurar variables de entorno PRIMERO (ver arriba)
+
+# Ejecutar tests (no requiere DB externa)
 make test
 
 # Para desarrollo (compila automáticamente en Docker)
@@ -101,8 +146,11 @@ make clean
 #### Ejecutar manualmente
 
 ```bash
-# Desarrollo (Docker compilará automáticamente)
-cp .env.dev .env
+# ⚠️ PASO 1: Configurar variables de entorno (OBLIGATORIO)
+cp .env.dev.example .env.dev
+# Editar .env.dev y cambiar las contraseñas
+
+# PASO 2: Desarrollo (Docker compilará automáticamente)
 docker-compose --env-file .env.dev up --build
 
 # O crear imagen standalone
@@ -118,24 +166,26 @@ docker build -t pedidos-ms .
 > - ✅ Optimiza el tamaño de la imagen final
 > - ✅ Utiliza cache de dependencias Maven
 
-### Opción 2: Ejecución local con H2
+### Opción 2: Ejecución local con H2 (Sin Docker)
 
-### 1. Clona el repositorio
+#### 1. Clona el repositorio
 
 ```bash
 git clone https://github.com/tuusuario/pedidos-ms.git
 cd pedidos-ms
 ```
 
-### 2. Compila y ejecuta
+#### 2. Compila y ejecuta
 
 ```bash
+# Ejecutar con perfil dev (H2 automática)
 ./mvnw spring-boot:run
+
+# O ejecutar tests
+./mvnw test
 ```
 
-O usa tu IDE (IntelliJ, VS Code) para correr `PedidosMsApplication`.
-
-### 3. Accede a la consola H2 (opcional)
+#### 3. Accede a la consola H2 (opcional)
 
 URL: <http://localhost:8080/h2-console>
 
@@ -262,6 +312,63 @@ src/
     ├── infrastructure/  ← Repositorios y controladores (adaptadores)
     └── shared/          ← DTOs y errores
 ```
+
+---
+
+## 🐛 Troubleshooting
+
+### ❌ Error: "Failed to configure a DataSource"
+
+**Problema:** No tienes configuradas las variables de entorno.
+
+**Solución:**
+
+```bash
+# 1. Verifica que existan los archivos
+ls -la .env.*
+
+# 2. Si no existen, cópialos:
+cp .env.dev.example .env.dev
+cp .env.prod.example .env.prod
+
+# 3. Edita las contraseñas en los archivos:
+nano .env.dev  # o tu editor preferido
+```
+
+### ❌ Error: "Connection refused" o problemas de DB
+
+**Problema:** Las contraseñas en `.env.dev` o `.env.prod` no están configuradas.
+
+**Solución:**
+
+```bash
+# Verificar contenido del archivo
+cat .env.dev
+
+# Debe mostrar contraseñas reales, NO "your_password_here"
+```
+
+### ❌ Error: "No such file or directory: .env"
+
+**Problema:** El Makefile busca archivos `.env` sin el sufijo.
+
+**Solución:**
+
+```bash
+# El Makefile automáticamente copia el correcto:
+make up-dev  # copia .env.dev a .env
+make up-prod # copia .env.prod a .env
+```
+
+### ✅ Tests siempre funcionan
+
+Los tests usan H2 en memoria y no requieren configuración externa.
+
+```bash
+make test  # Siempre debe funcionar
+```
+
+---
 
 ## 🧑 Autor
 
