@@ -4,12 +4,12 @@ import com.josue.pedidos_ms.application.usecase.CargarPedidosUseCase;
 import com.josue.pedidos_ms.domain.model.*;
 import com.josue.pedidos_ms.domain.service.*;
 import com.josue.pedidos_ms.infrastructure.repository.*;
+import com.josue.pedidos_ms.shared.dto.ResultadoCargaResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockMultipartFile;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,10 +72,10 @@ class CargarPedidosUseCaseTest {
     when(zonaRepository.findById("ZONA2")).thenReturn(Optional.empty());
 
     // Ejecutar
-    var resultado = useCase.procesarArchivo(file);
+    ResultadoCargaResponse resultado = useCase.procesarArchivo(file);
 
-    assertEquals(2, resultado.get("totalRegistros"));
-    assertEquals(1, resultado.get("guardados"));
-    assertTrue(((Map<?, ?>) resultado.get("errores")).containsKey("Clientes no encontrados"));
+    assertEquals(2, resultado.totalRegistros());
+    assertEquals(1, resultado.guardados());
+    assertTrue(resultado.errores().containsKey("Clientes no encontrados"));
   }
 }

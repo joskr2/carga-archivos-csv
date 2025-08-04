@@ -1,10 +1,13 @@
 package com.josue.pedidos_ms.application.usecase;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import com.josue.pedidos_ms.domain.model.*;
 import com.josue.pedidos_ms.domain.service.*;
 import com.josue.pedidos_ms.infrastructure.repository.*;
 import com.josue.pedidos_ms.shared.dto.PedidoCsvDTO;
+import com.josue.pedidos_ms.shared.dto.ResultadoCargaResponse;
+import com.josue.pedidos_ms.shared.error.CsvValidationException;
 import com.josue.pedidos_ms.shared.logging.BaseLogger;
 import com.josue.pedidos_ms.shared.logging.LogContext;
 import com.josue.pedidos_ms.shared.logging.LogEvents;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.*;
@@ -32,7 +36,7 @@ public class CargarPedidosUseCase extends BaseLogger {
   private final EstadoValidator estadoValidator;
   private final FechaValidator fechaValidator;
 
-  public Map<String, Object> procesarArchivo(MultipartFile file) {
+  public ResultadoCargaResponse procesarArchivo(MultipartFile file) {
     LogContext.setOperacion("CARGA_CSV");
 
     logInfo(LogEvents.INICIO_CARGA_CSV,
@@ -47,16 +51,23 @@ public class CargarPedidosUseCase extends BaseLogger {
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
         CSVReader csvReader = new CSVReader(reader)) {
 
-      List<String[]> filas = csvReader.readAll();
+      List<String[]> filas;
 
+      try {
+        filas = csvReader.readAll();
+      } catch (IOException | CsvException e) {
+        logError(LogEvents.ERROR_LECTURA_CSV,
+            "Error al leer archivo CSV: {}", file.getOriginalFilename(), e);
+        throw new CsvValidationException("Archivo CSV ilegible o mal formateado: " + e.getMessage(), e);
+      }
       if (filas.size() <= 1) {
         logWarn(LogEvents.ARCHIVO_VACIO,
             "Archivo CSV vacío o solo con cabecera: {} filas", filas.size());
         LogContext.clear();
-        return Map.of(
-            "totalRegistros", 0,
-            "guardados", 0,
-            "errores", Map.of("Archivo vacío", List.of(Map.of("linea", 0, "motivo", "El archivo no contiene datos"))));
+        return new ResultadoCargaResponse(
+            0,
+            0,
+            Map.of("Archivo vacío", List.of(Map.of("linea", 0, "motivo", "El archivo no contiene datos"))));
       }
 
       logInfo(LogEvents.INICIO_CARGA_CSV,
@@ -114,6 +125,9 @@ public class CargarPedidosUseCase extends BaseLogger {
             "Guardados exitosamente {} pedidos", guardados);
       }
 
+    } catch (CsvValidationException e) {
+      // Re-lanzar excepciones de CSV para manejo en el controlador
+      throw e;
     } catch (Exception e) {
       logError(LogEvents.ERROR_LECTURA_CSV,
           "Error general al procesar archivo CSV", e);
@@ -127,10 +141,7 @@ public class CargarPedidosUseCase extends BaseLogger {
         "Procesamiento completado - Total: {}, Guardados: {}, Errores: {}",
         total, guardados, erroresAgrupados.size());
 
-    return Map.of(
-        "totalRegistros", total,
-        "guardados", guardados,
-        "errores", erroresAgrupados);
+    return new ResultadoCargaResponse(total, guardados, erroresAgrupados);
   }
 
   private List<String> validar(PedidoCsvDTO dto) {
